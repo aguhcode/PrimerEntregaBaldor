@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validacion de datos</title>
+    <link rel="stylesheet" href="agu.css">
+    <title>Registro de Datos</title>
 </head>
 <body>
-    
+    <h1>Registro de Datos</h1>
+    <form id="registroForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required><br><br>
 
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" required><br><br>
 
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" required><br><br>
+
+        <button type="submit">Registrar</button>
+    </form>
 
     <script src="agu.js"></script>
 </body>
