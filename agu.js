@@ -8,7 +8,7 @@ let edad = prompt("Por favor, ingresa tu edad:"); //prompt
 }
 
 
-//console.log("Imprimiendo números del 1 al 10:");  //ciclo for
+//console.log("Imprimiendo numeros del 1 al 10:");  //ciclo for
 //for (var i = 1; i <= 10; i++) {
 //    console.log(i);
 //}
