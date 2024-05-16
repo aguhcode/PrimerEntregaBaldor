@@ -1,5 +1,5 @@
 
-var edad = prompt("Por favor, ingresa tu edad:"); //prompt
+let edad = prompt("Por favor, ingresa tu edad:"); //prompt
 
   if (edad >= 18) {         //operador
     console.log("Puedes votar en las proximas elecciones!");
