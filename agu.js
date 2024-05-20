@@ -9,9 +9,9 @@ function verificarEdadParaVotar() {
 
 
   if (edad >= 18) {
-    console.log("Podes votar en las proximas elecciones!");
+    alert("Podes votar en las proximas elecciones!");
   } else {
-    console.log("Debes tener al menos 18 anios para votar.");
+    alert("Debes tener al menos 18 anios para votar.");
   }
 }
 
