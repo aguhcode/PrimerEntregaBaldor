@@ -16,11 +16,11 @@ let reservas = [];
 function solicitarReservaConPrompt() {
   let nombre = prompt("Por favor, ingresa tu nombre:");
   let edad = prompt("Por favor, ingresa tu edad:");
-  let numeroHabitacion = prompt("Por favor, ingresa el número de habitación:");
+  let numeroHabitacion = prompt("Por favor, ingresa el número de habitacion:");
   let noches = prompt("Por favor, ingresa el número de noches:");
 
   if (isNaN(edad) || edad.trim() === "" || parseInt(edad) < 18) {
-    alert("Debes tener al menos 18 años para hacer una reserva.");
+    alert("Debes tener al menos 18 anios para hacer una reserva.");
     return;
   }
 
@@ -30,7 +30,7 @@ function solicitarReservaConPrompt() {
 
   let nuevaReserva = new Reserva(nombre, edad, numeroHabitacion, noches);
   reservas.push(nuevaReserva);
-  alert("¡Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche));
+  alert("Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche));
 }
 
 function solicitarReserva() {
@@ -40,7 +40,7 @@ function solicitarReserva() {
   let noches = document.getElementById('noches').value;
 
   if (isNaN(edad) || edad.trim() === "" || parseInt(edad) < 18) {
-    alert("Debes tener al menos 18 años para hacer una reserva.");
+    alert("Debes tener al menos 18 anios para hacer una reserva.");
     return;
   }
 
@@ -50,7 +50,7 @@ function solicitarReserva() {
 
   let nuevaReserva = new Reserva(nombre, edad, numeroHabitacion, noches);
   reservas.push(nuevaReserva);
-  alert("¡Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche));
+  alert("Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche));
 
   document.getElementById('reservaForm').reset();
 }
@@ -97,12 +97,10 @@ function mostrarResultadosBusqueda(reservasEncontradas) {
   }
 }
 
-// Agregar event listeners a los botones
 document.getElementById('hacerReservaBtn').addEventListener('click', solicitarReserva);
 document.getElementById('buscarPorNombreBtn').addEventListener('click', buscarPorNombre);
 document.getElementById('buscarPorHabitacionBtn').addEventListener('click', buscarPorHabitacion);
 
-// Capturar entradas mediante prompt() al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
   if (confirm("¿Quieres hacer una reserva utilizando prompt?")) {
     solicitarReservaConPrompt();
