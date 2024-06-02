@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="agu.css">
-    <title>Registro de Datos</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reserva de Hotel</title>
+<link rel="stylesheet" href="agu.css">
 </head>
 <body>
-    <h1>Registro de Datos</h1>
-    <form id="registroForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required><br><br>
-
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" required><br><br>
-
-        <label for="edad">Edad:</label>
-        <input type="number" id="edad" required><br><br>
-
-        <button type="submit">Registrar</button>
+<div class="container">
+    <h1>Reserva de Hotel</h1>
+    <form id="reservaForm">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required>
+    
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" required>
+    
+    <label for="numeroHabitacion">Número de Habitación:</label>
+    <input type="number" id="numeroHabitacion" required>
+    
+    <label for="noches">Noches:</label>
+    <input type="number" id="noches" required>
+    
+    <button type="button" onclick="solicitarReserva()">Hacer Reserva</button>
     </form>
 
-    <script src="agu.js"></script>
+    <div class="results">
+    <h2>Buscar Reservas</h2>
+    <label for="buscarNombre">Buscar por Nombre:</label>
+    <input type="text" id="buscarNombre">
+    <button type="button" onclick="buscarPorNombre()">Buscar</button>
+
+    <label for="buscarHabitacion">Buscar por Número de Habitación:</label>
+    <input type="number" id="buscarHabitacion">
+    <button type="button" onclick="buscarPorHabitacion()">Buscar</button>
+
+    <div id="resultadoBusqueda"></div>
+    </div>
+</div>
+
+<script src="agu.js"></script>   
 </body>
 </html>
