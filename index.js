@@ -25,28 +25,6 @@ function guardarReservas() {
   localStorage.setItem('reservas', JSON.stringify(reservas));
 }
 
-function solicitarReservaConPrompt() {
-  let nombre = prompt("Por favor, ingresa tu nombre:");
-  let edad = prompt("Por favor, ingresa tu edad:");
-  let numeroHabitacion = prompt("Por favor, ingresa el numero de habitacion:");
-  let noches = prompt("Por favor, ingresa el numero de noches:");
-
-  if (isNaN(edad) || edad.trim() === "" || parseInt(edad) < 18) {
-    alert("Debes tener al menos 18 anos para hacer una reserva.");
-    return;
-  }
-
-  edad = parseInt(edad);
-  noches = parseInt(noches);
-  numeroHabitacion = parseInt(numeroHabitacion);
-
-  let nuevaReserva = new Reserva(nombre, edad, numeroHabitacion, noches);
-  reservas.push(nuevaReserva);
-  alert("Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche));
-
-  guardarReservas();
-}
-
 function solicitarReserva() {
   let nombre = document.getElementById('nombre').value;
   let edad = document.getElementById('edad').value;
@@ -54,7 +32,7 @@ function solicitarReserva() {
   let noches = document.getElementById('noches').value;
 
   if (isNaN(edad) || edad.trim() === "" || parseInt(edad) < 18) {
-    alert("Debes tener al menos 18 anos para hacer una reserva.");
+    mostrarMensaje("Debes tener al menos 18 años para hacer una reserva.", "error");
     return;
   }
 
@@ -64,37 +42,31 @@ function solicitarReserva() {
 
   let nuevaReserva = new Reserva(nombre, edad, numeroHabitacion, noches);
   reservas.push(nuevaReserva);
-  alert("Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche));
+  mostrarMensaje("¡Reserva exitosa! El costo total es: $" + nuevaReserva.calcularCosto(precioPorNoche), "success");
 
   guardarReservas();
-
   document.getElementById('reservaForm').reset();
 }
 
 function mostrarReservas() {
-  console.log("Reservas realizadas:");
+  let resultadoReservas = document.getElementById('resultadoReservas');
+  resultadoReservas.innerHTML = '';
   reservas.forEach((reserva, index) => {
-    console.log(`Reserva ${index + 1}: ${reserva.nombre}, Edad: ${reserva.edad}, Habitacion: ${reserva.numeroHabitacion}, Noches: ${reserva.noches}, Costo Total: $${reserva.calcularCosto(precioPorNoche)}`);
+    let reservaInfo = document.createElement('div');
+    reservaInfo.textContent = `Reserva ${index + 1}: Nombre: ${reserva.nombre}, Edad: ${reserva.edad}, Habitación: ${reserva.numeroHabitacion}, Noches: ${reserva.noches}, Costo Total: $${reserva.calcularCosto(precioPorNoche)}`;
+    resultadoReservas.appendChild(reservaInfo);
   });
-}
-
-function buscarReservaPorNombre(nombre) {
-  return reservas.filter(reserva => reserva.nombre.toLowerCase() === nombre.toLowerCase());
-}
-
-function buscarReservasPorNumeroHabitacion(numeroHabitacion) {
-  return reservas.filter(reserva => reserva.numeroHabitacion === numeroHabitacion);
 }
 
 function buscarPorNombre() {
   let nombreBusqueda = document.getElementById('buscarNombre').value;
-  let reservasEncontradas = buscarReservaPorNombre(nombreBusqueda);
+  let reservasEncontradas = reservas.filter(reserva => reserva.nombre.toLowerCase() === nombreBusqueda.toLowerCase());
   mostrarResultadosBusqueda(reservasEncontradas);
 }
 
 function buscarPorHabitacion() {
   let numeroHabitacionBusqueda = parseInt(document.getElementById('buscarHabitacion').value);
-  let reservasEncontradas = buscarReservasPorNumeroHabitacion(numeroHabitacionBusqueda);
+  let reservasEncontradas = reservas.filter(reserva => reserva.numeroHabitacion === numeroHabitacionBusqueda);
   mostrarResultadosBusqueda(reservasEncontradas);
 }
 
@@ -105,12 +77,23 @@ function mostrarResultadosBusqueda(reservasEncontradas) {
   if (reservasEncontradas.length > 0) {
     reservasEncontradas.forEach(reserva => {
       let reservaInfo = document.createElement('div');
-      reservaInfo.textContent = `Nombre: ${reserva.nombre}, Habitacion: ${reserva.numeroHabitacion}, Noches: ${reserva.noches}`;
+      reservaInfo.textContent = `Nombre: ${reserva.nombre}, Habitación: ${reserva.numeroHabitacion}, Noches: ${reserva.noches}`;
       resultadoBusqueda.appendChild(reservaInfo);
     });
   } else {
     resultadoBusqueda.textContent = "No se encontraron reservas.";
   }
+}
+
+function mostrarMensaje(mensaje, tipo) {
+  let mensajeDiv = document.createElement('div');
+  mensajeDiv.className = tipo;
+  mensajeDiv.textContent = mensaje;
+  document.body.appendChild(mensajeDiv);
+
+  setTimeout(() => {
+    mensajeDiv.remove();
+  }, 3000);
 }
 
 document.getElementById('hacerReservaBtn').addEventListener('click', solicitarReserva);
@@ -119,7 +102,5 @@ document.getElementById('buscarPorHabitacionBtn').addEventListener('click', busc
 
 document.addEventListener('DOMContentLoaded', function() {
   cargarReservas();
-  if (confirm("¿Quieres hacer una reserva utilizando prompt?")) {
-    solicitarReservaConPrompt();
-  }
+  mostrarReservas();
 });
